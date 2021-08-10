@@ -1,10 +1,10 @@
 """Capacited Vehicles Routing Problem (CVRP)."""
 from path_feature_calculator import distance_calculation
-from printResult import print_solution
+from print_result import print_solution
 from dataModel import create_data_model
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
-from visualiseResult import visualise_solution
+from visualise_result import visualise_solution
 
 
 def Routing(data):
