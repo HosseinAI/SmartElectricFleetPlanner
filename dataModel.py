@@ -10,8 +10,8 @@ def create_data_model(DM_directory, XY_directory):
 
         data['depot'] = 0
         data['demands'] = [random.randrange(1, 10, 1) for i in range(len(data['loc']))]
-        data['vehicle_capacities'] = [200, 200, 200, 200]
-        data['num_vehicles'] = 4
+        data['vehicle_capacities'] = [200, 200, 200]
+        data['num_vehicles'] = 3
         return data
 
 # data=create_data_model('utils/distance_matrix.csv','utils/XYLondon.csv')

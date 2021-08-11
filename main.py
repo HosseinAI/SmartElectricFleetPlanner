@@ -1,4 +1,6 @@
 """Capacited Vehicles Routing Problem (CVRP)."""
+import time
+
 from path_feature_calculator import distance_calculation
 from print_result import print_solution
 from dataModel import create_data_model
@@ -8,6 +10,7 @@ from visualise_result import visualise_solution
 
 
 def Routing(data):
+    start=time.time()
 
     manager = pywrapcp.RoutingIndexManager(len(data['DM']),
                                            data['num_vehicles'], data['depot'])
@@ -40,9 +43,11 @@ def Routing(data):
     search_parameters.time_limit.FromSeconds(1)
     routing.AddDimensionWithVehicleCapacity(demand_callback_index,0, data['vehicle_capacities'],True,'Capacity')
     solution = routing.SolveWithParameters(search_parameters)
+    end=time.time()
     if solution:
         print_solution(data, manager, routing, solution)
         visualise_solution(data, manager, routing, solution)
+        print("Elapsed time is  {} s".format(round(end - start), 1))
     return solution,routing
 
 
