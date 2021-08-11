@@ -9,14 +9,14 @@ from visualise_result import visualise_solution
 
 def Routing(data):
 
-    manager = pywrapcp.RoutingIndexManager(len(data['distance_matrix']),
+    manager = pywrapcp.RoutingIndexManager(len(data['DM']),
                                            data['num_vehicles'], data['depot'])
     def distance_callback(from_index, to_index):
         """Returns the distance between the two nodes."""
         # Convert from routing variable Index to distance matrix NodeIndex.
         from_node = manager.IndexToNode(from_index)
         to_node = manager.IndexToNode(to_index)
-        return data['distance_matrix'][from_node][to_node]
+        return data['DM'][from_node][to_node]
     # Create Routing Model.
     routing = pywrapcp.RoutingModel(manager)
 
@@ -50,7 +50,7 @@ def Routing(data):
 def main():
     """Solve the CVRP problem."""
     # Instantiate the data problem.
-    data = create_data_model()
+    data = create_data_model('utils/distance_matrix.csv','utils/XYLondon.csv')
 
     solution,routing = Routing(data)
 
@@ -70,15 +70,15 @@ def main():
     #
     #         if dist < 2300:
     #             good = False
-    longest_route= max(route_distances)
-
-    while longest_route>8:
-
-        index_ofmax=data['vehicle_capacities'].index(max(data['vehicle_capacities']))
-        data['vehicle_capacities'][index_ofmax]  =data['vehicle_capacities'][index_ofmax]*0.8
-        solution,routing = Routing(data)
-        route_distances = distance_calculation(data, routing, solution)
-        longest_route= max(route_distances)
+    # longest_route= max(route_distances)
+    #
+    # while longest_route>8:
+    #
+    #     index_ofmax=data['vehicle_capacities'].index(max(data['vehicle_capacities']))
+    #     data['vehicle_capacities'][index_ofmax]  =data['vehicle_capacities'][index_ofmax]*0.8
+    #     solution,routing = Routing(data)
+    #     route_distances = distance_calculation(data, routing, solution)
+    #     longest_route= max(route_distances)
 
 
 if __name__ == '__main__':
