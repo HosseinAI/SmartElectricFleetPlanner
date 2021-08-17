@@ -12,7 +12,8 @@ def distance_calculation(data, routing, solution):
             route_distance += routing.GetArcCostForVehicle(
                 previous_index, index, vehicle_id)
 
-        distance.append(route_distance/250)
+        distance.append(route_distance/1000)
     #distance.append(sum(distance))
-    return distance
+    time =[i / 40 for i in distance]
+    return distance,time
 

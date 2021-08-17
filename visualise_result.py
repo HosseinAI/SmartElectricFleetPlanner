@@ -33,7 +33,7 @@ def visualise_solution(data, manager, routing, solution):
         long=[lo[1] for lo in route]
 
         if len(lat)>2:
-            plt.text(lat[3], long[3], 'vehicle {0} with size of {1} & distance of {2}'.format(vehicle_id,len(lat),route_distance))
+            plt.text(lat[3], long[3], 'vehicle {0} with size of {1} & distance of {2}'.format(vehicle_id,len(lat),round(route_distance/40000,1)))
             plt.scatter(lat, long, c=color[vehicle_id])
             plt.plot(lat, long, linestyle='-', marker='x')
     plt.xlabel("Longitude", fontdict=font2)
