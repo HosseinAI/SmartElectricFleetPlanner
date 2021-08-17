@@ -2,6 +2,7 @@ import time
 from ortools.constraint_solver import routing_enums_pb2
 from ortools.constraint_solver import pywrapcp
 from visualise_result import visualise_solution
+from print_result import print_solution
 
 def Routing(data):
     start=time.time()

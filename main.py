@@ -12,38 +12,41 @@ def main():
     # Instantiate the data problem.
     data = create_data_model('utils/distance_matrix.csv','utils/XYLondon.csv')
 
+    dist_from_depot= data['distance_from_depot'].sort(reverse=True)
 
 
     solution, routing = local_Search.Routing(data)
     route_distances,route_time= distance_calculation(data, routing, solution)
 
 
+    i=0
+    for time in route_time:
 
-    # for dist in route_distances:
-    #     data['num_vehicles']
-    #     if dist >230000 :
-    #         i=route_distances.index(dist)
-    #         good=True
-    #     else:
-    #         good=False
-    #     while good:
-    #         data['vehicle_capacities'][i]=data['vehicle_capacities'][i]*0.8
-    #         solution,routing = local_Search.Routing(data)
-    #         route_distances = distance_calculation(data, routing, solution)
-    #         dist=route_distances
+        if time >data['drive_time'][i] :
+            run_out=True
+        else:
+            run_out=False
+        while run_out:
+            data['vehicle_capacities'][i]=data['vehicle_capacities'][i]*0.8
+            solution,routing = local_Search.Routing(data)
+            route_distances,route_time= distance_calculation(data, routing, solution)
+            time=route_time[i]
+
+            if time <= data['drive_time'][i] and max(route_time)<= max(data['drive_time']):
+                run_out = False
+
+        i=i+1
+
+    # longest_route= max(route_distances)
+    # longest_route_time = max(route_time)
     #
-    #         if dist < 2300:
-    #             good = False
-    longest_route= max(route_distances)
-    longest_route_time = max(route_time)
-
-    while longest_route_time>3:
-
-        index_ofmax=data['vehicle_capacities'].index(max(data['vehicle_capacities']))
-        data['vehicle_capacities'][index_ofmax]  =data['vehicle_capacities'][index_ofmax]*0.8
-        solution,routing = local_Search.Routing(data)
-        route_distances,route_time= distance_calculation(data, routing, solution)
-        longest_route_time= max(route_time)
+    # while longest_route_time>4:
+    #
+    #     index_ofmax=data['vehicle_capacities'].index(max(data['vehicle_capacities']))
+    #     data['vehicle_capacities'][index_ofmax]  =data['vehicle_capacities'][index_ofmax]*0.8
+    #     solution,routing = local_Search.Routing(data)
+    #     route_distances,route_time= distance_calculation(data, routing, solution)
+    #     longest_route_time= max(route_time)
 
 
 if __name__ == '__main__':
