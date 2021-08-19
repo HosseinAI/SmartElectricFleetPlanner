@@ -40,7 +40,7 @@ def Routing(data):
     solution = routing.SolveWithParameters(search_parameters)
     end=time.time()
     if solution:
-        print_solution(data, manager, routing, solution)
+        #print_solution(data, manager, routing, solution)
         visualise_solution(data, manager, routing, solution)
         print("Elapsed time is  {} s".format(round(end - start), 1))
     return solution,routing

@@ -32,9 +32,16 @@ def main():
             route_distances,route_time= distance_calculation(data, routing, solution)
             time=route_time[i]
 
+
+
+
+
+            if  max(route_time)> max(data['drive_time']):
+                i=route_time.index(max(route_time))
+                data['vehicle_capacities'][i] = data['vehicle_capacities'][i] * 0.8
+
             if time <= data['drive_time'][i] and max(route_time)<= max(data['drive_time']):
                 run_out = False
-
         i=i+1
 
     # longest_route= max(route_distances)
